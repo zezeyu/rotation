@@ -15,6 +15,8 @@
 		E157FC612099C23F002B4917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC602099C23F002B4917 /* main.m */; };
 		E157FC6B2099C23F002B4917 /* rotationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC6A2099C23F002B4917 /* rotationTests.m */; };
 		E157FC762099C23F002B4917 /* rotationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC752099C23F002B4917 /* rotationUITests.m */; };
+		E157FC852099C5E9002B4917 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC842099C5E9002B4917 /* BaseNavigationViewController.m */; };
+		E157FC882099CC8C002B4917 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC872099CC8C002B4917 /* testViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		E157FC712099C23F002B4917 /* rotationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rotationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E157FC752099C23F002B4917 /* rotationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = rotationUITests.m; sourceTree = "<group>"; };
 		E157FC772099C23F002B4917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E157FC832099C5E9002B4917 /* BaseNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationViewController.h; sourceTree = "<group>"; };
+		E157FC842099C5E9002B4917 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
+		E157FC862099CC8C002B4917 /* testViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
+		E157FC872099CC8C002B4917 /* testViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,10 @@
 				E157FC522099C23F002B4917 /* AppDelegate.m */,
 				E157FC542099C23F002B4917 /* ViewController.h */,
 				E157FC552099C23F002B4917 /* ViewController.m */,
+				E157FC832099C5E9002B4917 /* BaseNavigationViewController.h */,
+				E157FC842099C5E9002B4917 /* BaseNavigationViewController.m */,
+				E157FC862099CC8C002B4917 /* testViewController.h */,
+				E157FC872099CC8C002B4917 /* testViewController.m */,
 				E157FC572099C23F002B4917 /* Main.storyboard */,
 				E157FC5A2099C23F002B4917 /* Assets.xcassets */,
 				E157FC5C2099C23F002B4917 /* LaunchScreen.storyboard */,
@@ -268,6 +278,8 @@
 				E157FC562099C23F002B4917 /* ViewController.m in Sources */,
 				E157FC612099C23F002B4917 /* main.m in Sources */,
 				E157FC532099C23F002B4917 /* AppDelegate.m in Sources */,
+				E157FC852099C5E9002B4917 /* BaseNavigationViewController.m in Sources */,
+				E157FC882099CC8C002B4917 /* testViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +445,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6B3539P8YN;
 				INFOPLIST_FILE = rotation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cheanda.carmonitorv1.rotation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -447,6 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6B3539P8YN;
 				INFOPLIST_FILE = rotation/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cheanda.carmonitorv1.rotation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
