@@ -24,19 +24,31 @@
     self.title = @"互动相册";
     self.view.backgroundColor = [UIColor colorWithRed:248/255.0 green:208/255.0 blue:0 alpha:1];
     
+    UIImageView * imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"zeze"]];
+    imageview.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+    [self.view addSubview:imageview];
+    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
     
-    
-    PhotoScrollView *loop = [[PhotoScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 50)];
+    PhotoScrollView *loop = [[PhotoScrollView alloc] initWithFrame:CGRectMake(kScreenWidth, 64, kScreenWidth, kScreenHeight - 64 - 50)];
     [self.view addSubview:loop];
-    loop.backgroundColor = [UIColor redColor];
-    loop.imageURLStrings = @[@"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default",@"albumlist_download_img_card-bg_default"];
+    loop.imageURLStrings = @[@"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default"];
     loop.clickAction = ^(NSInteger index) {
         NSLog(@"curIndex: %ld", index);
     };
+    [UIView animateWithDuration:0.5 animations:^{
+        loop.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight- 64 - 50);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
 }
+
+
+
 
 -(void)back{
 
@@ -51,7 +63,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor colorWithRed:252/255.0 green:219/255.0 blue:0 alpha:1]];
+//    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor colorWithRed:252/255.0 green:219/255.0 blue:0 alpha:1]];
 //    self.navigationController.navigationBar.shadowImage = [self imageWithColor:[UIColor clearColor]];
     
 }
@@ -59,7 +71,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [self.navigationController.navigationBar lt_reset];
+//    [self.navigationController.navigationBar lt_reset];
 }
 
 - (void)didReceiveMemoryWarning {

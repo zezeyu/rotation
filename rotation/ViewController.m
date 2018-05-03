@@ -20,6 +20,11 @@
 #import <UINavigationBar+Awesome.h>
 #import "testViewController.h"
 @interface ViewController ()<popDelegate>
+{
+    NSArray * minImageArray;
+    UIImageView *imageview;
+    NSArray * bgImageArray;
+}
 
 @end
 
@@ -32,9 +37,9 @@
     
     // Do any additional setup after loading the view, typically from a nib.
 ///背景图片数据
-    NSArray * bgImageArray = @[@"albummenu_img_interaction",@"albummenu_img_static-bg_default",@"albummenu_img_video-bg_default",@"albummenu_img_share-bg_default"];
+    bgImageArray = @[@"albummenu_img_interaction-bg_default",@"albummenu_img_static-bg_default",@"albummenu_img_video-bg_default",@"albummenu_img_share-bg_default"];
 ///背景图片上的小图片
-    NSArray * minImageArray = @[@"albummenu_icon_interaction_default",@"albummenu_icon_static_default",@"albummenu_icon_video_default",@"albummenu_icon_share_default"];
+    minImageArray = @[@"albummenu_icon_interaction_default",@"albummenu_icon_static_default",@"albummenu_icon_video_default",@"albummenu_icon_share_default"];
     for (int i = 0; i < 4; i ++) {
         UIButton * rotationBut = [UIButton buttonWithType:UIButtonTypeCustom];
         rotationBut.frame = CGRectMake(50 + ((kWidth + 20) * i), kY, kWidth, kHeight);
@@ -44,8 +49,12 @@
         [rotationBut addTarget:self action:@selector(butAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:rotationBut];
     }
-    
-    
+    float h = ( kScreenHeight - kScreenWidth )/2;
+    float w = ( kScreenWidth - kScreenHeight )/2;
+    imageview = [[UIImageView alloc]initWithFrame:CGRectMake(w, h, kScreenHeight, kScreenWidth)];
+    [imageview setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+    imageview.hidden = YES;
+    [self.view addSubview:imageview];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -59,7 +68,7 @@
 {
     [super viewWillDisappear:animated];
     
-    [self.navigationController.navigationBar lt_reset];
+//    [self.navigationController.navigationBar lt_reset];
 }
 
 
@@ -71,28 +80,43 @@
     float h = ( kScreenHeight - kScreenWidth )/2;
     float w = ( kScreenWidth - kScreenHeight )/2;
     
+    imageview.image = [UIImage imageNamed:bgImageArray[sender.tag-100]];
+    
     NSLog(@"%f",kScreenWidth);
-        [UIView animateWithDuration:0.3f animations:^{
+    [sender setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [UIView animateWithDuration:0.5f animations:^{
         
             sender.frame = CGRectMake(w, h, kScreenHeight, kScreenWidth);
             [sender setTransform:CGAffineTransformMakeRotation(M_PI_2)];
             
         } completion:^(BOOL finished) {
+            [sender setImage:[UIImage imageNamed:minImageArray[sender.tag-100]] forState:UIControlStateNormal];
             sender.frame = CGRectMake(w, h, kScreenHeight, kScreenWidth);
             testViewController * test = [[testViewController alloc]init];
             test.delegate = self;
             test.index = sender.tag;
             [self.navigationController pushViewController:test animated:NO];
+            
+            [self.view bringSubviewToFront:imageview];
+            imageview.frame=CGRectMake(w, h, kScreenHeight, kScreenWidth);
+            [imageview setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         }];
 }
 
 -(void)popAnimated:(NSInteger)index{
+    imageview.hidden = NO;
+    
     UIButton * sender = (UIButton *)[self.view viewWithTag:index];
-    [UIView animateWithDuration:0.3f animations:^{
+    sender.hidden = YES;
+    [UIView animateWithDuration:0.5f animations:^{
+        [imageview setTransform:CGAffineTransformMakeRotation(0)];
+        imageview.frame = CGRectMake(50 + ((kWidth + 20) * (sender.tag-100)), kY, kWidth, kHeight);
         [sender setTransform:CGAffineTransformMakeRotation(0)];
         sender.frame = CGRectMake(50 + ((kWidth + 20) * (sender.tag-100)), kY, kWidth, kHeight);
     } completion:^(BOOL finished) {
         //
+        sender.hidden = NO;
+        imageview.hidden = YES;
         NSLog(@"%f , %f , %f , %f",sender.frame.origin.x,sender.frame.origin.y,sender.frame.size.width,sender.frame.size.height);
     }];
 }
