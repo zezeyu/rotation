@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E8B87723C9358F1EB3A7A90 /* libPods-rotationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FECBA02522A29506D7C2EFCE /* libPods-rotationTests.a */; };
+		7C53FF14ACE688C87D9D8474 /* libPods-rotation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D07F30436041F65EB42A975 /* libPods-rotation.a */; };
+		903E2B35A3B9ED623392EDD4 /* libPods-rotationUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 340410F278E5A84171F6095C /* libPods-rotationUITests.a */; };
 		E157FC532099C23F002B4917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC522099C23F002B4917 /* AppDelegate.m */; };
 		E157FC562099C23F002B4917 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC552099C23F002B4917 /* ViewController.m */; };
 		E157FC592099C23F002B4917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E157FC572099C23F002B4917 /* Main.storyboard */; };
@@ -17,6 +20,7 @@
 		E157FC762099C23F002B4917 /* rotationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC752099C23F002B4917 /* rotationUITests.m */; };
 		E157FC852099C5E9002B4917 /* BaseNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC842099C5E9002B4917 /* BaseNavigationViewController.m */; };
 		E157FC882099CC8C002B4917 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC872099CC8C002B4917 /* testViewController.m */; };
+		E1A0B319209ACD7700B3FAB3 /* PhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A0B318209ACD7700B3FAB3 /* PhotoScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09B29CE9A59137A451438042 /* Pods-rotationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rotationUITests/Pods-rotationUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		340410F278E5A84171F6095C /* libPods-rotationUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rotationUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		44C4121A5C5079E2628FE6AF /* Pods-rotationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-rotationUITests/Pods-rotationUITests.release.xcconfig"; sourceTree = "<group>"; };
+		53ED3E45A4D88741940E2C5F /* Pods-rotation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotation.release.xcconfig"; path = "Pods/Target Support Files/Pods-rotation/Pods-rotation.release.xcconfig"; sourceTree = "<group>"; };
+		9D07F30436041F65EB42A975 /* libPods-rotation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rotation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABF5C81B224275C31CDD70F /* Pods-rotation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rotation/Pods-rotation.debug.xcconfig"; sourceTree = "<group>"; };
+		BE99C7D82B2F8CF03499B324 /* Pods-rotationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rotationTests/Pods-rotationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E157FC4E2099C23F002B4917 /* rotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E157FC512099C23F002B4917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E157FC522099C23F002B4917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +68,10 @@
 		E157FC842099C5E9002B4917 /* BaseNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationViewController.m; sourceTree = "<group>"; };
 		E157FC862099CC8C002B4917 /* testViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testViewController.h; sourceTree = "<group>"; };
 		E157FC872099CC8C002B4917 /* testViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testViewController.m; sourceTree = "<group>"; };
+		E1A0B317209ACD7700B3FAB3 /* PhotoScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoScrollView.h; sourceTree = "<group>"; };
+		E1A0B318209ACD7700B3FAB3 /* PhotoScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoScrollView.m; sourceTree = "<group>"; };
+		FD56C24C9D36034B2A0D598E /* Pods-rotationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-rotationTests/Pods-rotationTests.release.xcconfig"; sourceTree = "<group>"; };
+		FECBA02522A29506D7C2EFCE /* libPods-rotationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rotationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C53FF14ACE688C87D9D8474 /* libPods-rotation.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E8B87723C9358F1EB3A7A90 /* libPods-rotationTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +95,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				903E2B35A3B9ED623392EDD4 /* libPods-rotationUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15F808BEA24B2577C4AC73F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D07F30436041F65EB42A975 /* libPods-rotation.a */,
+				FECBA02522A29506D7C2EFCE /* libPods-rotationTests.a */,
+				340410F278E5A84171F6095C /* libPods-rotationUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		16ADB2E25E1E81815CB87362 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AABF5C81B224275C31CDD70F /* Pods-rotation.debug.xcconfig */,
+				53ED3E45A4D88741940E2C5F /* Pods-rotation.release.xcconfig */,
+				BE99C7D82B2F8CF03499B324 /* Pods-rotationTests.debug.xcconfig */,
+				FD56C24C9D36034B2A0D598E /* Pods-rotationTests.release.xcconfig */,
+				09B29CE9A59137A451438042 /* Pods-rotationUITests.debug.xcconfig */,
+				44C4121A5C5079E2628FE6AF /* Pods-rotationUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E157FC452099C23F002B4917 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +132,8 @@
 				E157FC692099C23F002B4917 /* rotationTests */,
 				E157FC742099C23F002B4917 /* rotationUITests */,
 				E157FC4F2099C23F002B4917 /* Products */,
+				16ADB2E25E1E81815CB87362 /* Pods */,
+				15F808BEA24B2577C4AC73F3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +158,8 @@
 				E157FC842099C5E9002B4917 /* BaseNavigationViewController.m */,
 				E157FC862099CC8C002B4917 /* testViewController.h */,
 				E157FC872099CC8C002B4917 /* testViewController.m */,
+				E1A0B317209ACD7700B3FAB3 /* PhotoScrollView.h */,
+				E1A0B318209ACD7700B3FAB3 /* PhotoScrollView.m */,
 				E157FC572099C23F002B4917 /* Main.storyboard */,
 				E157FC5A2099C23F002B4917 /* Assets.xcassets */,
 				E157FC5C2099C23F002B4917 /* LaunchScreen.storyboard */,
@@ -149,9 +194,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E157FC7A2099C23F002B4917 /* Build configuration list for PBXNativeTarget "rotation" */;
 			buildPhases = (
+				41503CB41C81F39A3940E2A6 /* [CP] Check Pods Manifest.lock */,
 				E157FC4A2099C23F002B4917 /* Sources */,
 				E157FC4B2099C23F002B4917 /* Frameworks */,
 				E157FC4C2099C23F002B4917 /* Resources */,
+				1CD04705994E8C3DBEC8DDDA /* [CP] Embed Pods Frameworks */,
+				A2409FA597A9519C0BAD6120 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -166,9 +214,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E157FC7D2099C23F002B4917 /* Build configuration list for PBXNativeTarget "rotationTests" */;
 			buildPhases = (
+				A0D9E9F6B0C2B8E22122151D /* [CP] Check Pods Manifest.lock */,
 				E157FC622099C23F002B4917 /* Sources */,
 				E157FC632099C23F002B4917 /* Frameworks */,
 				E157FC642099C23F002B4917 /* Resources */,
+				8B4E8822D2F992A57B56085D /* [CP] Embed Pods Frameworks */,
+				41FF4B362DD067F9BF07EA70 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -184,9 +235,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E157FC802099C23F002B4917 /* Build configuration list for PBXNativeTarget "rotationUITests" */;
 			buildPhases = (
+				CEB9CC47C7B1EB58EDF11C61 /* [CP] Check Pods Manifest.lock */,
 				E157FC6D2099C23F002B4917 /* Sources */,
 				E157FC6E2099C23F002B4917 /* Frameworks */,
 				E157FC6F2099C23F002B4917 /* Resources */,
+				DAEBFFC432980419E11B8DDD /* [CP] Embed Pods Frameworks */,
+				2C37C33FC39BDB4B167704A7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,11 +324,159 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1CD04705994E8C3DBEC8DDDA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rotation/Pods-rotation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C37C33FC39BDB4B167704A7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rotationUITests/Pods-rotationUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41503CB41C81F39A3940E2A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-rotation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41FF4B362DD067F9BF07EA70 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rotationTests/Pods-rotationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B4E8822D2F992A57B56085D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rotationTests/Pods-rotationTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0D9E9F6B0C2B8E22122151D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-rotationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2409FA597A9519C0BAD6120 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rotation/Pods-rotation-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CEB9CC47C7B1EB58EDF11C61 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-rotationUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAEBFFC432980419E11B8DDD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rotationUITests/Pods-rotationUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E157FC4A2099C23F002B4917 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1A0B319209ACD7700B3FAB3 /* PhotoScrollView.m in Sources */,
 				E157FC562099C23F002B4917 /* ViewController.m in Sources */,
 				E157FC612099C23F002B4917 /* main.m in Sources */,
 				E157FC532099C23F002B4917 /* AppDelegate.m in Sources */,
@@ -440,6 +642,7 @@
 		};
 		E157FC7B2099C23F002B4917 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AABF5C81B224275C31CDD70F /* Pods-rotation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -455,6 +658,7 @@
 		};
 		E157FC7C2099C23F002B4917 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53ED3E45A4D88741940E2C5F /* Pods-rotation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -470,6 +674,7 @@
 		};
 		E157FC7E2099C23F002B4917 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE99C7D82B2F8CF03499B324 /* Pods-rotationTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -485,6 +690,7 @@
 		};
 		E157FC7F2099C23F002B4917 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD56C24C9D36034B2A0D598E /* Pods-rotationTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -500,6 +706,7 @@
 		};
 		E157FC812099C23F002B4917 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09B29CE9A59137A451438042 /* Pods-rotationUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6B3539P8YN;
@@ -514,6 +721,7 @@
 		};
 		E157FC822099C23F002B4917 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44C4121A5C5079E2628FE6AF /* Pods-rotationUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6B3539P8YN;

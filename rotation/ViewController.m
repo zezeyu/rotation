@@ -9,65 +9,107 @@
 #import "ViewController.h"
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
-@interface ViewController ()
+///图片的宽
+#define kWidth (kScreenWidth - 160)/4
+///图片的高
+#define kHeight (kScreenWidth - 160)/4 * 213 / 147
 
-@property(nonatomic,strong)UIButton * rotationBut;
-@property(nonatomic,strong)UIImageView * imageView;
+#define kY (kScreenHeight - kHeight)/2
+
+#import <Masonry.h>
+#import <UINavigationBar+Awesome.h>
+#import "testViewController.h"
+@interface ViewController ()<popDelegate>
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
+    
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
+    
     // Do any additional setup after loading the view, typically from a nib.
-    self.rotationBut = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rotationBut.frame = CGRectMake(100, 100, 221/2, 320/2);
-    self.rotationBut.backgroundColor = [UIColor yellowColor];
-    [self.rotationBut addTarget:self action:@selector(butAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.rotationBut];
-
-    ///图片
-    self.imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"albummenu_img_interaction"]];
-    self.imageView.frame = CGRectMake(0, 0, self.rotationBut.frame.size.width, self.rotationBut.frame.size.height);
-    [self.rotationBut addSubview:self.imageView];
-    ///图片上的小图片 （算了懒得写）
-//    UIImageView * minImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"albummenu_icon_interaction"]];
-//    minImageView.frame = CGRectMake(0, 0, <#CGFloat width#>, <#CGFloat height#>)
+///背景图片数据
+    NSArray * bgImageArray = @[@"albummenu_img_interaction",@"albummenu_img_static-bg_default",@"albummenu_img_video-bg_default",@"albummenu_img_share-bg_default"];
+///背景图片上的小图片
+    NSArray * minImageArray = @[@"albummenu_icon_interaction_default",@"albummenu_icon_static_default",@"albummenu_icon_video_default",@"albummenu_icon_share_default"];
+    for (int i = 0; i < 4; i ++) {
+        UIButton * rotationBut = [UIButton buttonWithType:UIButtonTypeCustom];
+        rotationBut.frame = CGRectMake(50 + ((kWidth + 20) * i), kY, kWidth, kHeight);
+        rotationBut.tag = 100 + i;
+        [rotationBut setBackgroundImage:[UIImage imageNamed:bgImageArray[i]] forState:UIControlStateNormal];
+        [rotationBut setImage:[UIImage imageNamed:minImageArray[i]] forState:UIControlStateNormal];
+        [rotationBut addTarget:self action:@selector(butAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:rotationBut];
+    }
     
     
 }
 
--(void)butAction:(UIButton *)sender{
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+    self.navigationController.navigationBar.shadowImage = [self imageWithColor:[UIColor clearColor]];
     
- 
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar lt_reset];
+}
+
+
+-(void)butAction:(UIButton *)sender{
+///将试图移动到最上层
+    [self.view bringSubviewToFront:sender];
     sender.selected =! sender.selected;
     
-    float f = ( kScreenHeight - kScreenWidth )/2;
+    float h = ( kScreenHeight - kScreenWidth )/2;
     float w = ( kScreenWidth - kScreenHeight )/2;
     
     NSLog(@"%f",kScreenWidth);
-    if (sender.selected) {
         [UIView animateWithDuration:0.3f animations:^{
-            self.imageView.frame = CGRectMake(0, 0, kScreenHeight, kScreenWidth);
-            self.rotationBut.frame = CGRectMake(w, f, kScreenHeight, kScreenWidth);
-            [self.rotationBut setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        
+            sender.frame = CGRectMake(w, h, kScreenHeight, kScreenWidth);
+            [sender setTransform:CGAffineTransformMakeRotation(M_PI_2)];
             
         } completion:^(BOOL finished) {
-            //
-            
+            sender.frame = CGRectMake(w, h, kScreenHeight, kScreenWidth);
+            testViewController * test = [[testViewController alloc]init];
+            test.delegate = self;
+            test.index = sender.tag;
+            [self.navigationController pushViewController:test animated:NO];
         }];
-    }else{
-        [UIView animateWithDuration:0.3f animations:^{
-            [self.rotationBut setTransform:CGAffineTransformMakeRotation(0)];
-            self.imageView.frame = CGRectMake(0, 0, 221/2, 320/2);
-            self.rotationBut.frame = CGRectMake(100, 100, 221/2, 320/2);
-        } completion:^(BOOL finished) {
-            //
-            NSLog(@"%f , %f , %f , %f",self.rotationBut.frame.origin.x,self.rotationBut.frame.origin.y,self.rotationBut.frame.size.width,self.rotationBut.frame.size.height);
-        }];
-    }
+}
+
+-(void)popAnimated:(NSInteger)index{
+    UIButton * sender = (UIButton *)[self.view viewWithTag:index];
+    [UIView animateWithDuration:0.3f animations:^{
+        [sender setTransform:CGAffineTransformMakeRotation(0)];
+        sender.frame = CGRectMake(50 + ((kWidth + 20) * (sender.tag-100)), kY, kWidth, kHeight);
+    } completion:^(BOOL finished) {
+        //
+        NSLog(@"%f , %f , %f , %f",sender.frame.origin.x,sender.frame.origin.y,sender.frame.size.width,sender.frame.size.height);
+    }];
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,6 +7,11 @@
 //
 
 #import "testViewController.h"
+#import <UINavigationBar+Awesome.h>
+#import "PhotoScrollView.h"
+#import <Masonry.h>
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface testViewController ()
 
@@ -16,7 +21,45 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"互动相册";
+    self.view.backgroundColor = [UIColor colorWithRed:248/255.0 green:208/255.0 blue:0 alpha:1];
+    
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    
+    
+    
+    PhotoScrollView *loop = [[PhotoScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - 64 - 50)];
+    [self.view addSubview:loop];
+    loop.backgroundColor = [UIColor redColor];
+    loop.imageURLStrings = @[@"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default",@"albumlist_download_img_card-bg_default"];
+    loop.clickAction = ^(NSInteger index) {
+        NSLog(@"curIndex: %ld", index);
+    };
+}
+
+-(void)back{
+
+    if ([_delegate respondsToSelector:@selector(popAnimated:)]) {
+        [_delegate popAnimated:self.index];
+    }
+    [self.navigationController popViewControllerAnimated:NO];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor colorWithRed:252/255.0 green:219/255.0 blue:0 alpha:1]];
+//    self.navigationController.navigationBar.shadowImage = [self imageWithColor:[UIColor clearColor]];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar lt_reset];
 }
 
 - (void)didReceiveMemoryWarning {

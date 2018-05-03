@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol popDelegate <NSObject>
+
+//@optional
+
+-(void)popAnimated:(NSInteger)index;
+
+@end
 
 @interface testViewController : UIViewController
+@property(nonatomic,assign)NSInteger index;
+@property(nonatomic,assign)id<popDelegate>delegate;
 
 @end
