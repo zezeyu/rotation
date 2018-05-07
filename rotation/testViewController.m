@@ -34,7 +34,7 @@
     
     PhotoScrollView *loop = [[PhotoScrollView alloc] initWithFrame:CGRectMake(kScreenWidth, 64, kScreenWidth, kScreenHeight - 64 - 50)];
     [self.view addSubview:loop];
-    loop.imageURLStrings = @[@"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default"];
+    loop.imageURLStrings = @[@"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default",@"albumlist_download_img_card-bg_default"];
     loop.clickAction = ^(NSInteger index) {
         NSLog(@"curIndex: %ld", index);
     };

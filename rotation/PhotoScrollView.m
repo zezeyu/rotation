@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIImageView *middleImageView;
 @property (nonatomic, strong) UIImageView *rightImageView;
 @property (nonatomic, assign) NSInteger curIndex;
+
 @end
 
 @implementation PhotoScrollView
@@ -102,7 +103,7 @@
     if (!_scrollView) {
         _scrollView = [UIScrollView new];
         _scrollView.delegate = self;
-//        _scrollView.pagingEnabled = YES;
+        _scrollView.pagingEnabled = YES;
         _scrollView.bounces = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
@@ -196,7 +197,7 @@
         self.rightImageView.image = [UIImage imageNamed:self.imageURLStrings[rightIndex]];
         
         // every scrolled, move current page to center
-        [self setScrollViewContentOffsetCenter];
+//        [self setScrollViewContentOffsetCenter];
     }
 }
 
@@ -235,37 +236,41 @@
         self.clickAction (self.curIndex);
     }
 }
-
+#pragma -- scrollView实时滑动代理方法
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
 //    NSLog(@"%f",self.scrollView.contentOffset.x);
     CGFloat imageHeight = CGRectGetHeight(self.scrollView.bounds);
     CGFloat imageWidth = imageHeight * 458.5 / 235;
     CGFloat imageX = (kScreenWidth-imageWidth)/2;
-    
     CGFloat viewCenter = kScreenWidth;
     CGFloat rightH = scrollView.contentOffset.x - viewCenter;
     CGFloat Y = imageHeight/4;
     CGFloat RY = Y*rightH/viewCenter;
     CGFloat W = imageWidth/2;
     CGFloat RW = W * rightH/viewCenter;
-    
-    
 //    CGFloat MX ;
-    
-    
     self.leftImageView.frame = CGRectMake((kScreenWidth - imageWidth/2) -imageX + RW, imageHeight/4 + RY, imageWidth/2 - RW, imageHeight/2 - RY *2);
     if (self.scrollView.contentOffset.x > kScreenWidth) {
         self.middleImageView.frame  = CGRectMake(imageX + RW, 0 + RY, imageWidth - RW, imageHeight - RY *2);
     }
     self.rightImageView.frame = CGRectMake(imageX, imageHeight/4 - RY, imageWidth/2 + RW, imageHeight/2+ RY *2);
-    
 }
 
+#pragma -- 停止滑动代理方法
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-//    [self setScrollViewContentOffsetCenter];
-    NSLog(@"%f",self.scrollView.contentOffset.x);
-    
+    ///停止滑动调用方法
+    CGFloat imageHeight = CGRectGetHeight(self.scrollView.bounds);
+    CGFloat imageWidth = imageHeight * 458.5 / 235;
+    CGFloat imageX = (kScreenWidth-imageWidth)/2;
+    self.leftImageView.frame    = CGRectMake((kScreenWidth - imageWidth/2) -imageX, imageHeight/4, imageWidth/2, imageHeight/2);
+    self.middleImageView.frame  = CGRectMake(imageX, 0, imageWidth, imageHeight);
+    self.rightImageView.frame   = CGRectMake(imageX, imageHeight/4, imageWidth/2, imageHeight/2);
+    if (scrollView.contentOffset.x < kScreenWidth) {
+        [self.scrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:NO];
+    }
+    if (scrollView.contentOffset.x == kScreenWidth*2 ) {
+        [self.scrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:NO];
+    }
 }
 
 @end
