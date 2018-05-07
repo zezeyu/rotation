@@ -7,22 +7,37 @@
 //
 
 #import "PhotoScrollView.h"
+#import "PhotoCoverView.h"
 #import <Masonry.h>
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface PhotoScrollView ()
 @property (nonatomic, strong) UIScrollView *scrollView;
-
+///左边的View
 @property(nonatomic,strong)UIView *leftView;
+///中间的View
 @property(nonatomic,strong)UIView *middleView;
+///右边的View
 @property(nonatomic,strong)UIView *rightView;
 
+///下面三个对应的view上的image
 @property (nonatomic, strong) UIImageView *leftImageView;
 @property (nonatomic, strong) UIImageView *middleImageView;
 @property (nonatomic, strong) UIImageView *rightImageView;
 @property (nonatomic, assign) NSInteger curIndex;
-
+///中间封面的底片
+@property(nonatomic,strong)UIView * middlePhotographicFilmView;
+///左边封面的底片
+@property(nonatomic,strong)UIView * leftPhotographicFilmView;
+///右边封面的底片
+@property(nonatomic,strong)UIView * rightPhotographicFilmView;
+///中间相册封面
+@property(nonatomic, strong) PhotoCoverView * middleCoverView;
+///左边相册封面
+@property(nonatomic, strong) PhotoCoverView * leftCoverView;
+///右边相册封面
+@property(nonatomic, strong) PhotoCoverView * rightCoverView;
 @end
 
 @implementation PhotoScrollView
@@ -46,14 +61,46 @@
 
 #pragma mark - setupViews
 - (void)setupViews {
+    ///加载三个view
     [self.scrollView addSubview:self.leftView];
     [self.scrollView addSubview:self.middleView];
     [self.scrollView addSubview:self.rightView];
-    
+    ///加载三个view上的imageview
     [self.leftView addSubview:self.leftImageView];
     [self.middleView addSubview:self.middleImageView];
     [self.rightView addSubview:self.rightImageView];
     [self addSubview:self.scrollView];
+    
+    ///中间的相册底色
+    [self.middleView addSubview:self.middlePhotographicFilmView];
+    [self.middlePhotographicFilmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleImageView.mas_left).mas_offset(10);
+        make.top.mas_equalTo(self.middleImageView.mas_top).mas_offset(10);
+        make.bottom.mas_equalTo(self.middleImageView.mas_bottom).offset(-10);
+        make.width.equalTo(self.middlePhotographicFilmView.mas_height);
+    }];
+    ///左边的相册底色
+    [self.leftView addSubview:self.leftPhotographicFilmView];
+    [self.leftPhotographicFilmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.leftImageView.mas_left).mas_offset(10);
+        make.top.mas_equalTo(self.leftImageView.mas_top).mas_offset(10);
+        make.bottom.mas_equalTo(self.leftImageView.mas_bottom).offset(-10);
+        make.width.equalTo(self.leftPhotographicFilmView.mas_height);
+    }];
+    ///右边的相册底色
+    [self.rightView addSubview:self.rightPhotographicFilmView];
+    [self.rightPhotographicFilmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.rightImageView.mas_left).mas_offset(10);
+        make.top.mas_equalTo(self.rightImageView.mas_top).mas_offset(10);
+        make.bottom.mas_equalTo(self.rightImageView.mas_bottom).offset(-10);
+        make.width.equalTo(self.rightPhotographicFilmView.mas_height);
+    }];
+    ///中间的相册封面
+    [self addSubview:self.middleCoverView];
+    ///左边的相册封面
+    [self addSubview:self.leftCoverView];
+    ///右边的相册封面
+    [self addSubview:self.rightCoverView];
     
     [self placeSubviews];
 }
@@ -98,7 +145,7 @@
         [self caculateCurIndex];
     }
 }
-
+///懒加载scrollView
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [UIScrollView new];
@@ -108,9 +155,63 @@
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
     }
-    
     return _scrollView;
 }
+
+///中间的封面
+-(PhotoCoverView *)middleCoverView{
+    if (!_middleCoverView) {
+        _middleCoverView = [[PhotoCoverView alloc]init];
+    }
+    return _middleCoverView;
+}
+///左边的封面
+-(PhotoCoverView *)leftCoverView{
+    if (!_leftCoverView) {
+        _leftCoverView = [[PhotoCoverView alloc]init];
+    }
+    return _leftCoverView;
+}
+///右边的封面
+-(PhotoCoverView *)rightCoverView{
+    if (!_rightCoverView) {
+        _rightCoverView = [[PhotoCoverView alloc]init];
+    }
+    return _rightCoverView;
+}
+
+///中间相册底色
+-(UIView *)middlePhotographicFilmView{
+    if (!_middlePhotographicFilmView) {
+        _middlePhotographicFilmView = [[UIView alloc]init];//0 194 129
+        _middlePhotographicFilmView.backgroundColor = [UIColor colorWithRed:0/255.0 green:194/255.0 blue:129/255.0 alpha:1.0];
+        _middlePhotographicFilmView.layer.cornerRadius = 14;
+        _middlePhotographicFilmView.layer.masksToBounds = YES;
+    }
+    return _middlePhotographicFilmView;
+}
+///左边相册底色
+-(UIView *)leftPhotographicFilmView{
+    if (!_leftPhotographicFilmView) {
+        _leftPhotographicFilmView = [[UIView alloc]init];
+        _leftPhotographicFilmView.backgroundColor = [UIColor colorWithRed:0/255.0 green:194/255.0 blue:129/255.0 alpha:1.0];
+        _leftPhotographicFilmView.layer.cornerRadius = 14;
+        _leftPhotographicFilmView.layer.masksToBounds = YES;
+    }
+    return _leftPhotographicFilmView;
+}
+///右边相册底色
+-(UIView *)rightPhotographicFilmView{
+    if (!_rightPhotographicFilmView) {
+        _rightPhotographicFilmView = [[UIView alloc]init];
+        _rightPhotographicFilmView.backgroundColor = [UIColor colorWithRed:0/255.0 green:194/255.0 blue:129/255.0 alpha:1.0];
+        _rightPhotographicFilmView.layer.cornerRadius = 14;
+        _rightPhotographicFilmView.layer.masksToBounds = YES;
+    }
+    return _rightPhotographicFilmView;
+}
+
+
 -(UIView *)leftView{
     if (!_leftView) {
         _leftView = [UIView new];

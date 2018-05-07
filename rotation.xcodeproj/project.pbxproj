@@ -10,6 +10,7 @@
 		2E8B87723C9358F1EB3A7A90 /* libPods-rotationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FECBA02522A29506D7C2EFCE /* libPods-rotationTests.a */; };
 		7C53FF14ACE688C87D9D8474 /* libPods-rotation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D07F30436041F65EB42A975 /* libPods-rotation.a */; };
 		903E2B35A3B9ED623392EDD4 /* libPods-rotationUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 340410F278E5A84171F6095C /* libPods-rotationUITests.a */; };
+		E131EB3220A0691B004D8114 /* PhotoCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = E131EB3120A0691B004D8114 /* PhotoCoverView.m */; };
 		E157FC532099C23F002B4917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC522099C23F002B4917 /* AppDelegate.m */; };
 		E157FC562099C23F002B4917 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E157FC552099C23F002B4917 /* ViewController.m */; };
 		E157FC592099C23F002B4917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E157FC572099C23F002B4917 /* Main.storyboard */; };
@@ -48,6 +49,8 @@
 		9D07F30436041F65EB42A975 /* libPods-rotation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rotation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABF5C81B224275C31CDD70F /* Pods-rotation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rotation/Pods-rotation.debug.xcconfig"; sourceTree = "<group>"; };
 		BE99C7D82B2F8CF03499B324 /* Pods-rotationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rotationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rotationTests/Pods-rotationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E131EB3020A0691B004D8114 /* PhotoCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoCoverView.h; sourceTree = "<group>"; };
+		E131EB3120A0691B004D8114 /* PhotoCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoCoverView.m; sourceTree = "<group>"; };
 		E157FC4E2099C23F002B4917 /* rotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E157FC512099C23F002B4917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E157FC522099C23F002B4917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				E157FC872099CC8C002B4917 /* testViewController.m */,
 				E1A0B317209ACD7700B3FAB3 /* PhotoScrollView.h */,
 				E1A0B318209ACD7700B3FAB3 /* PhotoScrollView.m */,
+				E131EB3020A0691B004D8114 /* PhotoCoverView.h */,
+				E131EB3120A0691B004D8114 /* PhotoCoverView.m */,
 				E157FC572099C23F002B4917 /* Main.storyboard */,
 				E157FC5A2099C23F002B4917 /* Assets.xcassets */,
 				E157FC5C2099C23F002B4917 /* LaunchScreen.storyboard */,
@@ -479,6 +484,7 @@
 				E1A0B319209ACD7700B3FAB3 /* PhotoScrollView.m in Sources */,
 				E157FC562099C23F002B4917 /* ViewController.m in Sources */,
 				E157FC612099C23F002B4917 /* main.m in Sources */,
+				E131EB3220A0691B004D8114 /* PhotoCoverView.m in Sources */,
 				E157FC532099C23F002B4917 /* AppDelegate.m in Sources */,
 				E157FC852099C5E9002B4917 /* BaseNavigationViewController.m in Sources */,
 				E157FC882099CC8C002B4917 /* testViewController.m in Sources */,
