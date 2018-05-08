@@ -54,9 +54,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        [self addObservers];
         [self setupViews];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self removeObservers];
+    
 }
 
 #pragma mark - setupViews
@@ -96,12 +103,12 @@
         make.width.equalTo(self.rightPhotographicFilmView.mas_height);
     }];
     ///中间的相册封面
-    [self addSubview:self.middleCoverView];
-    ///左边的相册封面
-    [self addSubview:self.leftCoverView];
+    [self.scrollView addSubview:self.leftCoverView];
     ///右边的相册封面
-    [self addSubview:self.rightCoverView];
-    
+    [self.scrollView addSubview:self.rightCoverView];
+    ///中间的相册封面
+    [self.scrollView addSubview:self.middleCoverView];
+
     [self placeSubviews];
 }
 
@@ -112,23 +119,66 @@
     CGFloat ViewHeight = CGRectGetHeight(self.scrollView.bounds);
     CGFloat imageHeight = CGRectGetHeight(self.scrollView.bounds);
     CGFloat imageWidth = imageHeight * 458.5 / 235;
-    CGFloat imageX = (kScreenWidth-imageWidth)/2;
+    CGFloat imageX = (ViewWidth-imageWidth)/2;
     
     self.leftView.frame    = CGRectMake(ViewWidth * 0, 0, ViewWidth, ViewHeight);
     self.middleView.frame  = CGRectMake(ViewWidth * 1, 0, ViewWidth, ViewHeight);
     self.rightView.frame   = CGRectMake(ViewWidth * 2, 0, ViewWidth, ViewHeight);
     
-    self.leftImageView.frame    = CGRectMake((kScreenWidth - imageWidth/2) -imageX, imageHeight/4, imageWidth/2, imageHeight/2);
+    self.leftImageView.frame    = CGRectMake((ViewWidth - imageWidth/2) -imageX, imageHeight/4, imageWidth/2, imageHeight/2);
     self.middleImageView.frame  = CGRectMake(imageX, 0, imageWidth, imageHeight);
     self.rightImageView.frame   = CGRectMake(imageX, imageHeight/4, imageWidth/2, imageHeight/2);
     self.scrollView.contentSize = CGSizeMake(ViewWidth*3, 0);
+    
+    CGFloat coverWidth = imageHeight - 20;
+///左边的相册封面X和Y
+///左边的相册封面宽和高(右边的一样)
+    CGFloat leftWidth = coverWidth*2/3;
+
+    ///这里偷懒 随便写一个view补充左边和右边的图片边边
+    UIImageView * left_view = [[UIImageView alloc]init];
+    left_view.image = [UIImage imageNamed:@"albumlist_download_img_cover_default"];
+    [self.scrollView addSubview:left_view];
+    
+    [left_view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.leftView.mas_left).mas_offset(-leftWidth+30);
+        make.centerY.mas_equalTo(self.scrollView.mas_centerY);
+        make.width.height.mas_equalTo(leftWidth-20);
+    }];
+    
+    UIImageView * right_view = [[UIImageView alloc]init];
+    right_view.image = [UIImage imageNamed:@"albumlist_download_img_cover_default"];
+    [self.scrollView addSubview:right_view];
+    [right_view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.rightView.mas_right).mas_offset(-10);
+        make.centerY.mas_equalTo(self.scrollView.mas_centerY);
+        make.width.height.mas_equalTo(leftWidth-20);
+    }];
+    
+    [self.leftCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_left).mas_offset(-leftWidth+20);
+        make.centerY.mas_equalTo(self.scrollView.mas_centerY);
+        make.width.height.mas_equalTo(leftWidth);
+    }];
+    
+    [self.middleCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_left).mas_offset(imageX+10);
+        make.centerY.mas_equalTo(self.scrollView.mas_centerY);
+        make.width.height.mas_equalTo(coverWidth);
+    }];
+    
+    [self.rightCoverView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_right).mas_offset(-20);
+        make.centerY.mas_equalTo(self.scrollView.mas_centerY);
+        make.width.height.mas_equalTo(leftWidth);
+    }];
     
     [self setScrollViewContentOffsetCenter];
 }
 
 #pragma mark - set scrollView contentOffset to center
 - (void)setScrollViewContentOffsetCenter {
-    self.scrollView.contentOffset = CGPointMake(CGRectGetWidth(self.scrollView.bounds), 0);
+    [self.scrollView setContentOffset:CGPointMake(CGRectGetWidth(self.scrollView.bounds), 0) animated:NO];
 }
 
 #pragma mark - kvo
@@ -215,6 +265,7 @@
 -(UIView *)leftView{
     if (!_leftView) {
         _leftView = [UIView new];
+        
     }
     return _leftView;
 }
@@ -298,7 +349,7 @@
         self.rightImageView.image = [UIImage imageNamed:self.imageURLStrings[rightIndex]];
         
         // every scrolled, move current page to center
-//        [self setScrollViewContentOffsetCenter];
+        [self setScrollViewContentOffsetCenter];
     }
 }
 
@@ -307,14 +358,11 @@
     if (self.imageURLStrings && self.imageURLStrings.count > 0) {
         CGFloat pointX = self.scrollView.contentOffset.x;
         
-        // judge critical value，first and third imageView's contentoffset
         CGFloat criticalValue = .2f;
         
-        // scroll right, judge right critical value
         if (pointX > 2 * CGRectGetWidth(self.scrollView.bounds) - criticalValue) {
             self.curIndex = (self.curIndex + 1) % self.imageURLStrings.count;
         } else if (pointX < criticalValue) {
-            // scroll left，judge left critical value
             self.curIndex = (self.curIndex + self.imageURLStrings.count - 1) % self.imageURLStrings.count;
         }
     }
@@ -339,7 +387,7 @@
 }
 #pragma -- scrollView实时滑动代理方法
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    NSLog(@"%f",self.scrollView.contentOffset.x);
+///更新相册的的坐标点和大小
     CGFloat imageHeight = CGRectGetHeight(self.scrollView.bounds);
     CGFloat imageWidth = imageHeight * 458.5 / 235;
     CGFloat imageX = (kScreenWidth-imageWidth)/2;
@@ -349,10 +397,52 @@
     CGFloat RY = Y*rightH/viewCenter;
     CGFloat W = imageWidth/2;
     CGFloat RW = W * rightH/viewCenter;
-//    CGFloat MX ;
+///更新相册封面的坐标点和大小
+    CGFloat ViewWidth = CGRectGetWidth(self.scrollView.bounds);
+    CGFloat coverWidth = imageHeight - 20;
+    CGFloat leftWidth = coverWidth*2/3;
+///中间视图的间距(向左滑动的)
+    CGFloat middleX = ViewWidth - (imageX+10)-leftWidth+20;
+///实时改变的X的值
+    CGFloat M_X = rightH / (ViewWidth / middleX);
+///实时改短宽高的值(左、中、右同用)
+    CGFloat middle_width = (coverWidth - leftWidth) * rightH/ViewWidth;
+///右边的间距
+    CGFloat rightX = (imageX+10)+10+10;
+///右边实时改变的X的值
+    CGFloat R_X = rightH / (ViewWidth/rightX);
+    
+    [self.rightCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_right).mas_offset(-20+R_X);
+        make.width.height.mas_equalTo(leftWidth + middle_width);
+    }];
+///左边的间距
+    CGFloat leftX = ViewWidth-(imageX+10)-(leftWidth - 20);
+///左边实时改变的X的值
+    CGFloat L_X = rightH / (ViewWidth/leftX);
+    [self.leftCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_left).mas_offset(-leftWidth+20 + L_X);
+        make.width.height.mas_equalTo(leftWidth - middle_width);
+    }];
     self.leftImageView.frame = CGRectMake((kScreenWidth - imageWidth/2) -imageX + RW, imageHeight/4 + RY, imageWidth/2 - RW, imageHeight/2 - RY *2);
+    
     if (self.scrollView.contentOffset.x > kScreenWidth) {
         self.middleImageView.frame  = CGRectMake(imageX + RW, 0 + RY, imageWidth - RW, imageHeight - RY *2);
+        [self.middleCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.middleView.mas_left).mas_offset(imageX+10+M_X);
+            make.width.height.mas_equalTo(coverWidth- middle_width);
+        }];
+    }
+    if (self.scrollView.contentOffset.x < kScreenWidth) {
+        ///中间视图的间距(向右滑动的)
+        CGFloat middle_X = imageX + 10 + 20;
+        ///实时改变的X的值(向右滑动的)
+        CGFloat ML_X = rightH / (ViewWidth / middle_X);
+        self.middleImageView.frame  = CGRectMake(imageX , 0 - RY, imageWidth + RW, imageHeight + RY *2);
+        [self.middleCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.middleView.mas_left).mas_offset(imageX+10+ML_X);
+            make.width.height.mas_equalTo(coverWidth+ middle_width);
+        }];
     }
     self.rightImageView.frame = CGRectMake(imageX, imageHeight/4 - RY, imageWidth/2 + RW, imageHeight/2+ RY *2);
 }
@@ -360,18 +450,42 @@
 #pragma -- 停止滑动代理方法
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     ///停止滑动调用方法
+///无限轮播实现
+/**
+  让scrollView的X居中前！首先要让坐标还原
+ */
     CGFloat imageHeight = CGRectGetHeight(self.scrollView.bounds);
     CGFloat imageWidth = imageHeight * 458.5 / 235;
     CGFloat imageX = (kScreenWidth-imageWidth)/2;
     self.leftImageView.frame    = CGRectMake((kScreenWidth - imageWidth/2) -imageX, imageHeight/4, imageWidth/2, imageHeight/2);
     self.middleImageView.frame  = CGRectMake(imageX, 0, imageWidth, imageHeight);
     self.rightImageView.frame   = CGRectMake(imageX, imageHeight/4, imageWidth/2, imageHeight/2);
+    
+    CGFloat coverWidth = imageHeight - 20;
+    CGFloat leftWidth = coverWidth*2/3;
+    [self.leftCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_left).mas_offset(-leftWidth+20);
+        make.width.height.mas_equalTo(leftWidth);
+    }];
+    
+    [self.middleCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_left).mas_offset(imageX+10);
+        make.width.height.mas_equalTo(coverWidth);
+    }];
+    
+    [self.rightCoverView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.middleView.mas_right).mas_offset(-20);
+        make.width.height.mas_equalTo(leftWidth);
+    }];
+    
+///让scrollView的X居中
     if (scrollView.contentOffset.x < kScreenWidth) {
         [self.scrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:NO];
     }
     if (scrollView.contentOffset.x == kScreenWidth*2 ) {
         [self.scrollView setContentOffset:CGPointMake(kScreenWidth, 0) animated:NO];
     }
+
 }
 
 @end
