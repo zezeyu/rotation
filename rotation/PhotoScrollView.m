@@ -54,7 +54,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        ///添加kvo
         [self addObservers];
         [self setupViews];
     }
