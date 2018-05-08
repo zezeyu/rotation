@@ -36,7 +36,7 @@
     [self.view addSubview:loop];
     loop.imageURLStrings = @[@"albumlist_download_img_card-bg_default", @"albumlist_download_img_card-bg_default",@"albumlist_download_img_card-bg_default"];
     loop.clickAction = ^(NSInteger index) {
-        NSLog(@"curIndex: %ld", index);
+        NSLog(@"curIndex: %ld", (long)index);
     };
     [UIView animateWithDuration:0.5 animations:^{
         loop.frame = CGRectMake(0, 64, kScreenWidth, kScreenHeight- 64 - 50);
