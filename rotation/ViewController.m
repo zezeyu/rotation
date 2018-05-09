@@ -51,6 +51,7 @@
     }
     float h = ( kScreenHeight - kScreenWidth )/2;
     float w = ( kScreenWidth - kScreenHeight )/2;
+///添加这个图片的原因是，pop回来时button执行旋转回来的方法时，实际尺寸，和button背景图片的尺寸不一致，有一个疑难杂症的bug！超奇葩，不知道怎么解决，这是我想到的避免这个问题的方法
     imageview = [[UIImageView alloc]initWithFrame:CGRectMake(w, h, kScreenHeight, kScreenWidth)];
     [imageview setTransform:CGAffineTransformMakeRotation(M_PI_2)];
     imageview.hidden = YES;
@@ -73,51 +74,56 @@
 
 
 -(void)butAction:(UIButton *)sender{
-///将试图移动到最上层
+///将点击过后的view移动到最上层
     [self.view bringSubviewToFront:sender];
-    sender.selected =! sender.selected;
-    
+    ///计算一下改变后的坐标
     float h = ( kScreenHeight - kScreenWidth )/2;
     float w = ( kScreenWidth - kScreenHeight )/2;
-    
+
     imageview.image = [UIImage imageNamed:bgImageArray[sender.tag-100]];
-    
-    NSLog(@"%f",kScreenWidth);
+    ///点击的时候将按钮的image设置为空
     [sender setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
         [UIView animateWithDuration:0.5f animations:^{
-        
+            ///修改坐标尺寸大小（改变frame的放大动画）
             sender.frame = CGRectMake(w, h, kScreenHeight, kScreenWidth);
+            ///这个就是旋转动画了  M_PI_2(顺时针旋转90度)
             [sender setTransform:CGAffineTransformMakeRotation(M_PI_2)];
             
         } completion:^(BOOL finished) {
+            ///这两句是多加的，用来容错的！动画结束后确定下坐标值
             [sender setImage:[UIImage imageNamed:minImageArray[sender.tag-100]] forState:UIControlStateNormal];
             sender.frame = CGRectMake(w, h, kScreenHeight, kScreenWidth);
+            ///当动画执行完毕后，push到下一个控制器
             testViewController * test = [[testViewController alloc]init];
             test.delegate = self;
-            test.index = sender.tag;
+            test.index = sender.tag;///将按钮tag值传递过去
+            ///push方法的 animated设置为NO，这个很关键！！！（取消自带的push动画）
             [self.navigationController pushViewController:test animated:NO];
             
+            ///将imageView放到最上面，为了pop回来的旋转回来的动画能够衔接
             [self.view bringSubviewToFront:imageview];
+            ///每次旋转动画完毕后让imageView重新回到之前状态,等待回来时的旋转动画
             imageview.frame=CGRectMake(w, h, kScreenHeight, kScreenWidth);
             [imageview setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         }];
 }
 
 -(void)popAnimated:(NSInteger)index{
+    ///将iamgeView显示
     imageview.hidden = NO;
-    
     UIButton * sender = (UIButton *)[self.view viewWithTag:index];
+    ///pop回来先将button隐藏
     sender.hidden = YES;
     [UIView animateWithDuration:0.5f animations:^{
+        ///imageView和Button一起完成回来时的旋转变小的动画，但我们只会看到imageView的
         [imageview setTransform:CGAffineTransformMakeRotation(0)];
         imageview.frame = CGRectMake(50 + ((kWidth + 20) * (sender.tag-100)), kY, kWidth, kHeight);
         [sender setTransform:CGAffineTransformMakeRotation(0)];
         sender.frame = CGRectMake(50 + ((kWidth + 20) * (sender.tag-100)), kY, kWidth, kHeight);
     } completion:^(BOOL finished) {
-        //
+        ///动画执行完毕  将button显示，imageView隐藏
         sender.hidden = NO;
         imageview.hidden = YES;
-        NSLog(@"%f , %f , %f , %f",sender.frame.origin.x,sender.frame.origin.y,sender.frame.size.width,sender.frame.size.height);
     }];
 }
 

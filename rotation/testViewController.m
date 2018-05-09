@@ -55,6 +55,7 @@
     if ([_delegate respondsToSelector:@selector(popAnimated:)]) {
         [_delegate popAnimated:self.index];
     }
+    ///pop回来时也不要忘记了将pop的animated设置为NO
     [self.navigationController popViewControllerAnimated:NO];
     
 }
